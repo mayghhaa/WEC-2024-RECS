@@ -1,0 +1,27 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  club: one
+  pre_recruitment_talk_date: 2024-10-07
+  pre_recruitment_talk_venue: MyString
+  tasks_applicable: false
+  tasks_due_date: 2024-10-07
+  oa_applicable: false
+  oa_date: 2024-10-07
+  interview_start_date: 2024-10-07
+  interview_end_date: 2024-10-07
+  interview_venue: MyString
+  result_date: 2024-10-07
+
+two:
+  club: two
+  pre_recruitment_talk_date: 2024-10-07
+  pre_recruitment_talk_venue: MyString
+  tasks_applicable: false
+  tasks_due_date: 2024-10-07
+  oa_applicable: false
+  oa_date: 2024-10-07
+  interview_start_date: 2024-10-07
+  interview_end_date: 2024-10-07
+  interview_venue: MyString
+  result_date: 2024-10-07
