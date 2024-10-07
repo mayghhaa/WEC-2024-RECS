@@ -1,5 +1,5 @@
 class Club < ApplicationRecord
-  belongs_to :user
+  belongs_to :convener, class_name: 'User', foreign_key: 'convener_id'
 
 
   has_many :sigs, dependent: :destroy

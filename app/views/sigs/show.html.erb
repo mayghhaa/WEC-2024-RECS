@@ -17,7 +17,10 @@
   </ul>
 <% else %>
   <p>No recruitment event has been scheduled for this SIG yet.</p>
+  <% if current_user_convener?(@club) %>
   <%= link_to 'Add Recruitment Event', new_club_sig_schedule_path(@club, @sig) %>
+
+  <%end %>
 <% end %>
 
 <%= link_to 'Back to SIGs', club_path(@sig.club) %>

@@ -1,35 +1,65 @@
 class ClubsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
-  after_action :verify_authorized, except: [:index, :show]
+  before_action :authenticate_user!
+  before_action :authorize_convener, only: [:edit, :update]
+
 
   def index
     @clubs = Club.all
-  end
 
-  def new
-    @club = Club.new
-    authorize @club
-  end
-
-  def create
-    @club = Club.new(club_params)
-    @club.user = current_user  # Set the user_id directly
-
-    if @club.save
-      redirect_to @club, notice: 'Club was successfully created. You can now add recruitment events.'
-    else
-      render :new
-    end
-    authorize @club
   end
 
   def show
     @club = Club.find(params[:id])
   end
 
+  def new
+
+    if current_user.convener?
+      @club = current_user.clubs.build
+      authorize @club
+    else
+      redirect_to clubs_path, alert: 'Only conveners can create clubs.'
+    end
+
+  end
+
+  def create
+    @club = current_user.clubs.build(club_params)
+    authorize @club
+    if @club.save
+      redirect_to @club, notice: 'Club was successfully created.'
+    else
+      render :new
+    end
+
+  end
+
+  def edit
+    @club = Club.find(params[:id])
+    authorize @club
+  end
+
+  def update
+    @club = Club.find(params[:id])
+    authorize @club
+    if @club.update(club_params)
+      redirect_to @club, notice: 'Club was successfully updated.'
+    else
+      render :edit
+    end
+
+  end
+
   private
 
   def club_params
-    params.require(:club).permit(:name, :description, schedule_attributes: [:pre_recruitment_talk_date, :pre_recruitment_talk_venue, :tasks_applicable, :tasks_due_date, :oa_applicable, :oa_date, :interview_start_date, :interview_end_date, :interview_venue, :result_date])
+    params.require(:club).permit(:name, :description, :convener_id)
+  end
+
+  def authorize_convener
+    @club = Club.find(params[:id])
+    unless current_user_convener?(@club)
+      redirect_to clubs_path, alert: 'Only the convener can edit club details.'
+    end
   end
 end
