@@ -1,22 +1,19 @@
 <h1><%= @club.name %></h1>
 <p><%= @club.description %></p>
 
-<h2>Recruitment Event</h2>
-<% if @club.schedule.present? %>
+<h2>Special Interest Groups (SIGs)</h2>
+<% if @club.sigs.any? %>
   <ul>
-    <li><strong>Pre-Recruitment Talk Date:</strong> <%= @club.schedule.pre_recruitment_talk_date %></li>
-    <li><strong>Pre-Recruitment Talk Venue:</strong> <%= @club.schedule.pre_recruitment_talk_venue %></li>
-    <li><strong>Tasks Applicable:</strong> <%= @club.schedule.tasks_applicable ? "Yes" : "No" %></li>
-    <li><strong>Tasks Due Date:</strong> <%= @club.schedule.tasks_due_date %></li>
-    <li><strong>OA Date:</strong> <%= @club.schedule.oa_date %></li>
-    <li><strong>Interview Start Date:</strong> <%= @club.schedule.interview_start_date %></li>
-    <li><strong>Interview End Date:</strong> <%= @club.schedule.interview_end_date %></li>
-    <li><strong>Interview Venue:</strong> <%= @club.schedule.interview_venue %></li>
-    <li><strong>Result Date:</strong> <%= @club.schedule.result_date %></li>
+    <% @club.sigs.each do |sig| %>
+      <li>
+        <strong><%= link_to sig.name, club_sig_path(@club, sig) %></strong>
+        <p><%= sig.description %></p>
+      </li>
+    <% end %>
   </ul>
 <% else %>
-  <p>No recruitment event has been scheduled yet.</p>
-  <%= link_to 'Add Recruitment Event', new_club_schedule_path(@club) %>
+  <p>No Special Interest Groups have been created for this club yet.</p>
+  <%= link_to 'Add SIG', new_club_sig_path(@club) %>
 <% end %>
 
 <%= link_to 'Back to Clubs', clubs_path %>

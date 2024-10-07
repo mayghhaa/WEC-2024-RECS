@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_07_080455) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_07_131410) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -20,7 +20,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_07_080455) do
   end
 
   create_table "schedules", force: :cascade do |t|
-    t.integer "club_id", null: false
     t.date "pre_recruitment_talk_date"
     t.string "pre_recruitment_talk_venue"
     t.boolean "tasks_applicable"
@@ -33,7 +32,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_07_080455) do
     t.date "result_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["club_id"], name: "index_schedules_on_club_id"
+    t.integer "sig_id"
+    t.index ["sig_id"], name: "index_schedules_on_sig_id"
+  end
+
+  create_table "sigs", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "club_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_sigs_on_club_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,5 +57,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_07_080455) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "schedules", "clubs"
+  add_foreign_key "schedules", "sigs"
+  add_foreign_key "sigs", "clubs"
 end

@@ -1,6 +1,7 @@
-<h1>Add Recruitment Event for <%= @club.name %></h1>
+<h1>Add Recruitment Event for SIG: <%= @sig.name %> (Club: <%= @sig.club.name %>)</h1>
 
-<%= form_with(model: [@club, @schedule], local: true) do |f| %>
+
+<%= form_with(model: [@club, @sig, @schedule], local: true) do |f| %>
   <div>
     <%= f.label :pre_recruitment_talk_date, "Pre-Recruitment Talk Date" %>
     <%= f.date_select :pre_recruitment_talk_date %>
@@ -55,5 +56,5 @@
     <%= f.submit "Create Recruitment Event" %>
   </div>
 <% end %>
-
+<%= link_to 'Back to SIG', club_sig_path(@sig.club, @sig) %>
 <%= link_to 'Back to Club', club_path(@club) %>

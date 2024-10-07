@@ -1,0 +1,23 @@
+<h1><%= @sig.name %></h1>
+<p><%= @sig.description %></p>
+
+<h2>Recruitment Event</h2>
+<% if @sig.schedule.present? %>
+  <ul>
+    <li><strong>Pre-Recruitment Talk Date:</strong> <%= @sig.schedule.pre_recruitment_talk_date %></li>
+    <li><strong>Pre-Recruitment Talk Venue:</strong> <%= @sig.schedule.pre_recruitment_talk_venue %></li>
+    <li><strong>Tasks Applicable:</strong> <%= @sig.schedule.tasks_applicable ? "Yes" : "No" %></li>
+    <li><strong>Tasks Due Date:</strong> <%= @sig.schedule.tasks_due_date %></li>
+    <li><strong>OA Applicable:</strong> <%= @sig.schedule.oa_applicable ? "Yes" : "No" %></li>
+    <li><strong>OA Date:</strong> <%= @sig.schedule.oa_date %></li>
+    <li><strong>Interview Start Date:</strong> <%= @sig.schedule.interview_start_date %></li>
+    <li><strong>Interview End Date:</strong> <%= @sig.schedule.interview_end_date %></li>
+    <li><strong>Interview Venue:</strong> <%= @sig.schedule.interview_venue %></li>
+    <li><strong>Result Date:</strong> <%= @sig.schedule.result_date %></li>
+  </ul>
+<% else %>
+  <p>No recruitment event has been scheduled for this SIG yet.</p>
+  <%= link_to 'Add Recruitment Event', new_club_sig_schedule_path(@club, @sig) %>
+<% end %>
+
+<%= link_to 'Back to SIGs', club_path(@sig.club) %>
