@@ -1,6 +1,10 @@
 <h1><%= @club.name %></h1>
 <p><%= @club.description %></p>
 
+<% if current_user.student? %>
+  <%= link_to 'Register for Recruitment', new_club_registration_path(@club) %>
+<% end %>
+
 <h2>Special Interest Groups (SIGs)</h2>
 <% if @club.sigs.any? %>
   <ul>

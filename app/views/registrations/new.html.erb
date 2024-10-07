@@ -1,0 +1,14 @@
+<h1>Register for Recruitment</h1>
+
+<%= form_with(model: [@club, @registration], local: true) do |f| %>
+  <div>
+    <%= f.label :club_id, "Select Club" %>
+    <%= f.collection_select :club_id, @clubs, :id, :name, prompt: "Choose a Club" %>
+  </div>
+
+  <div>
+    <%= f.submit "Register" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Clubs', clubs_path %>

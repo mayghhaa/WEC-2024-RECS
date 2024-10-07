@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_07_134436) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_07_175138) do
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -18,6 +18,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_07_134436) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "convener_id"
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "club_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_registrations_on_club_id"
+    t.index ["user_id", "club_id"], name: "index_registrations_on_user_id_and_club_id", unique: true
+    t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
   create_table "schedules", force: :cascade do |t|
@@ -59,6 +69,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_07_134436) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "registrations", "clubs"
+  add_foreign_key "registrations", "users"
   add_foreign_key "schedules", "sigs"
   add_foreign_key "sigs", "clubs"
 end

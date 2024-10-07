@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :clubs
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
+ has_many :registrations
+ has_many :registered_students, through: :registrations, source: :user
 
 end
