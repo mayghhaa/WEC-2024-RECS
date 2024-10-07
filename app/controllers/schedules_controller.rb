@@ -1,8 +1,10 @@
 class SchedulesController < ApplicationController
   before_action :set_club
+  before_action :authenticate_user!
 
   def new
     @schedule = @club.build_schedule
+
   end
 
   def create
@@ -18,6 +20,8 @@ class SchedulesController < ApplicationController
 
   def set_club
     @club = Club.find(params[:club_id])
+
+
   end
 
   def schedule_params

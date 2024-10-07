@@ -1,4 +1,6 @@
 class ClubsController < ApplicationController
+  before_action :authenticate_user!, only: [:new, :create]
+  after_action :verify_authorized, except: [:index, :show]
   def index
     @clubs = Club.all
   end
@@ -8,6 +10,8 @@ class ClubsController < ApplicationController
 
   def create
     @club = Club.new(club_params)
+    @club.user = current_user
+
     if @club.save
       redirect_to @club, notice: 'Club was successfully created. You can now add recruitment events.'
     else
