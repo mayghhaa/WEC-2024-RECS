@@ -6,4 +6,5 @@ class Club < ApplicationRecord
   accepts_nested_attributes_for :sigs
   has_many :registrations
   has_many :registered_clubs, through: :registrations, source: :club
+  has_many :announcements
 end

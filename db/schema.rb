@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_07_175138) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_08_132529) do
+  create_table "announcements", force: :cascade do |t|
+    t.string "subject"
+    t.text "content"
+    t.integer "club_id"
+    t.integer "sig_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["club_id"], name: "index_announcements_on_club_id"
+    t.index ["sig_id"], name: "index_announcements_on_sig_id"
+  end
+
   create_table "clubs", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -69,6 +80,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_07_175138) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "announcements", "clubs"
+  add_foreign_key "announcements", "sigs"
   add_foreign_key "registrations", "clubs"
   add_foreign_key "registrations", "users"
   add_foreign_key "schedules", "sigs"

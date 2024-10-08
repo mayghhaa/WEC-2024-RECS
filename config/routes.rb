@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     resources :registrations, only: [:new, :create]
   end
 
+  resources :announcements
+
   # Root path set to clubs index
   root 'clubs#index'
 end

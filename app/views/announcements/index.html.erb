@@ -1,0 +1,12 @@
+<h1>Recruitment Announcements</h1>
+
+<% @announcements.each do |announcement| %>
+  <div>
+    <h3><%= announcement.subject %></h3>
+    <p><%= announcement.content %></p>
+    <p>Club: <%= announcement.club.name %></p>
+    <% if announcement.sig %>
+      <p>SIG: <%= announcement.sig.name %></p>
+    <% end %>
+  </div>
+<% end %>

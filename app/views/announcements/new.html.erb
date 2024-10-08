@@ -1,0 +1,27 @@
+<h1>New Announcement</h1>
+
+<%= form_with(model: @announcement, local: true) do |f| %>
+  <div>
+    <%= f.label :subject %>
+    <%= f.text_field :subject %>
+  </div>
+
+  <div>
+    <%= f.label :content %>
+    <%= f.text_area :content %>
+  </div>
+
+  <div>
+    <%= f.label :club_id, "Select Club" %>
+    <%= f.collection_select :club_id, @clubs, :id, :name, prompt: "Choose a Club" %>
+  </div>
+
+  <div>
+    <%= f.label :sig_id, "Select SIG (Optional)" %>
+    <%= f.collection_select :sig_id, @sigs, :id, :name, prompt: "Choose a SIG" %>
+  </div>
+
+  <div>
+    <%= f.submit "Create Announcement" %>
+  </div>
+<% end %>

@@ -12,14 +12,18 @@
 
   <body>
     <% if user_signed_in? %>
-  <%= button_to(
+      <%= button_to(
         "Log Out",
         destroy_user_session_path,
         method: :delete
       ) %>
-<% else %>
-  <%= button_to("Sign in", new_user_session_path ) %>
-<% end %>
+
+      <!-- Button to go to Announcements -->
+      <%= link_to "View Announcements", announcements_path, class: "button" %>
+
+    <% else %>
+      <%= button_to("Sign in", new_user_session_path ) %>
+    <% end %>
 
     <%= yield %>
   </body>

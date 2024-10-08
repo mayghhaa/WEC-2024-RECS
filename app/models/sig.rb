@@ -3,4 +3,6 @@ class Sig < ApplicationRecord
 
   has_one :schedule, dependent: :destroy
   accepts_nested_attributes_for :schedule
+
+  has_many :announcements
 end
