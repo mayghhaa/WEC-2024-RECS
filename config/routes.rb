@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   # Nested resources for clubs, SIGs, schedules, and rounds
   resources :clubs do
     resources :sigs do
+      member do
+        get 'registered_students'  # Adds a route like /clubs/:id/registered_students
+      end
       resources :schedules do # This is correctly nested within SIGs
         resources :rounds do
           # Custom route to complete a round within a SIG
@@ -20,6 +23,8 @@ Rails.application.routes.draw do
 
     # Adding a nested route for registrations under clubs
     resources :registrations, only: [:new, :create]
+
+
   end
 
   resources :announcements

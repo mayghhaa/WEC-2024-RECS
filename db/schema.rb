@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_11_164740) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_11_181708) do
   create_table "announcements", force: :cascade do |t|
     t.string "subject"
     t.text "content"
@@ -41,7 +41,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_164740) do
     t.boolean "moving_forward", default: true
     t.integer "sig_id"
     t.index ["club_id"], name: "index_registrations_on_club_id"
-    t.index ["user_id", "club_id"], name: "index_registrations_on_user_id_and_club_id", unique: true
+    t.index ["user_id", "club_id", "sig_id"], name: "index_registrations_on_user_id_and_club_id_and_sig_id", unique: true
     t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 

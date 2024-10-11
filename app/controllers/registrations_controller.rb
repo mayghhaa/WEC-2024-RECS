@@ -31,6 +31,8 @@ class RegistrationsController < ApplicationController
 
     redirect_to clubs_path, notice: 'Successfully registered for selected SIGs!'
   end
+
+
   private
 
   def set_club

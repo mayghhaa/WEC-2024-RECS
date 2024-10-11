@@ -1,0 +1,22 @@
+<h1>Registered Students for SIG: <%= @sig.name %></h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      
+      <th>Email</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @registrations.each do |registration| %>
+      <tr>
+        
+        <td><%= registration.user.email %></td>
+        <td><%= registration.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back to SIGs', club_sigs_path(@club), class: "btn btn-secondary" %>

@@ -1,6 +1,6 @@
 class SigsController < ApplicationController
   before_action :set_club
-  before_action :set_sig, only: [:show, :edit, :update, :destroy]
+  before_action :set_sig, only: [:show, :edit, :update, :destroy, :registered_students]
   before_action :authenticate_user!
   before_action :authorize_convener!
 
@@ -48,6 +48,15 @@ class SigsController < ApplicationController
     @sig.destroy  # Destroy the SIG
     redirect_to club_sigs_path(@club), notice: 'SIG was successfully destroyed.'  # Redirect to SIG index on success
   end
+
+  def registered_students
+    @club = Club.find(params[:club_id])
+    @sig = Sig.find(params[:id])
+    @registrations = Registration.where(club_id: @club.id, sig_id: @sig.id).includes(:user)
+  end
+
+
+
 
   private
 

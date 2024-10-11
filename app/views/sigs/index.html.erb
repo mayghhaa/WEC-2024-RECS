@@ -23,6 +23,7 @@
               <%= link_to 'Show', club_sig_path(@club, sig), class: "btn btn-info btn-sm" %>
               <%= link_to 'Edit', edit_club_sig_path(@club, sig), class: "btn btn-warning btn-sm" %>
               <%= link_to 'Destroy', club_sig_path(@club, sig), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+              <%= link_to 'Registered Students', registered_students_club_sig_path(@club, sig), class: "btn btn-primary btn-sm" %>
             </td>
           </tr>
         <% end %>
