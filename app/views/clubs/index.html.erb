@@ -1,12 +1,23 @@
-<h1>Clubs</h1>
+<h1 class="text-center mb-4">Clubs</h1>
 
-<ul>
-  <% @clubs.each do |club| %>
-    <li>
-      <%= link_to club.name, club_path(club) %>
-    </li>
+<div class="container">
+  <div class="row">
+    <% @clubs.each do |club| %>
+      <div class="col-md-4">
+        <div class="card mb-4">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= link_to club.name, club_sigs_path(club), class: "text-decoration-none" %>
+            </h5>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <% if current_user_convener?(@club) %>
+    <div class="mt-3 text-center">
+      <%= link_to 'Add a New Club', new_club_path, class: "btn btn-primary" %>
+    </div>
   <% end %>
-</ul>
-<% if current_user_convener?(@club) %>
-  <%= link_to 'Add a New Club', new_club_path %>
-<% end %>
+</div>

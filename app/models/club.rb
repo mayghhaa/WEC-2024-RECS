@@ -4,7 +4,9 @@ class Club < ApplicationRecord
 
   has_many :sigs, dependent: :destroy
   accepts_nested_attributes_for :sigs
+  has_many :schedules
   has_many :registrations
   has_many :registered_clubs, through: :registrations, source: :club
   has_many :announcements
+  has_many :rounds, dependent: :destroy
 end

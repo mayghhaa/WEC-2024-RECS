@@ -1,0 +1,39 @@
+<h1>Rounds for <%= @club.name %></h1>
+
+<% if @sig.present? %>
+  <%= link_to 'New Round', new_club_sig_schedule_round_path(@club, @sig, @schedule), class: "btn btn-primary" %>
+<% else %>
+  <%= link_to 'New Round', new_club_round_path(@club), class: "btn btn-primary" %>
+<% end %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Round Name</th>
+      <th>Round Type</th>
+      <th>Start Date</th>
+      <th>End Date</th>
+      <th>Link</th>
+      <th>Venue</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rounds.each do |round| %>
+      <tr>
+        <td><%= round.round_name %></td>
+        <td><%= round.round_type %></td>
+        <td><%= round.start_date.strftime('%Y-%m-%d') if round.start_date %></td>
+        <td><%= round.end_date.strftime('%Y-%m-%d') if round.end_date %></td>
+        <td><%= link_to "Link", round.link, target: "_blank" if round.link.present? %></td>
+        <td><%= round.venue %></td>
+        <td>
+          <%= link_to 'Edit', edit_club_round_path(@club, round), class: "btn btn-secondary" %>
+          <%= link_to 'Delete', club_round_path(@club, round), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Back to Clubs', clubs_path, class: "btn btn-secondary" %>

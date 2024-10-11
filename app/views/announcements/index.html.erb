@@ -1,12 +1,16 @@
-<h1>Recruitment Announcements</h1>
+<h1 class="text-center mb-4">Recruitment Announcements</h1>
 
-<% @announcements.each do |announcement| %>
-  <div>
-    <h3><%= announcement.subject %></h3>
-    <p><%= announcement.content %></p>
-    <p>Club: <%= announcement.club.name %></p>
-    <% if announcement.sig %>
-      <p>SIG: <%= announcement.sig.name %></p>
-    <% end %>
-  </div>
-<% end %>
+<div class="container">
+  <% @announcements.each do |announcement| %>
+    <div class="card mb-4">
+      <div class="card-body">
+        <h3 class="card-title"><%= announcement.subject %></h3>
+        <p class="card-text"><%= announcement.content %></p>
+        <p class="text-muted">Club: <%= announcement.club.name %></p>
+        <% if announcement.sig %>
+          <p class="text-muted">SIG: <%= announcement.sig.name %></p>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>

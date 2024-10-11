@@ -1,14 +1,23 @@
-<h1>Register for Recruitment</h1>
+<h1 class="text-center mb-4">Register for Recruitment</h1>
 
-<%= form_with(model: [@club, @registration], local: true) do |f| %>
-  <div>
-    <%= f.label :club_id, "Select Club" %>
-    <%= f.collection_select :club_id, @clubs, :id, :name, prompt: "Choose a Club" %>
+<div class="container">
+  <%= form_with(model: [@club, @registration], local: true, class: "needs-validation") do |f| %>
+    <div class="mb-3">
+      <%= f.label :club_id, "Select Club", class: "form-label" %>
+      <%= f.collection_select :club_id, @clubs, :id, :name, prompt: "Choose a Club", class: "form-select" %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :sig_ids, "Select SIGs to Apply", class: "form-label" %>
+      <%= f.collection_check_boxes :sig_ids, @club.sigs, :id, :name %>  <!-- Allow multiple SIG selections -->
+    </div>
+
+    <div class="d-grid gap-2">
+      <%= f.submit "Register", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+
+  <div class="mt-3">
+    <%= link_to 'Back to Clubs', clubs_path, class: "btn btn-secondary" %>
   </div>
-
-  <div>
-    <%= f.submit "Register" %>
-  </div>
-<% end %>
-
-<%= link_to 'Back to Clubs', clubs_path %>
+</div>

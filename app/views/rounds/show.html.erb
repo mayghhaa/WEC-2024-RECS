@@ -1,0 +1,20 @@
+<h1>Schedule: <%= @schedule.name %> (SIG: <%= @sig.name %>, Club: <%= @club.name %>)</h1>
+
+<h2>Rounds</h2>
+<% if @schedule.rounds.any? %>
+  <ul>
+    <% @schedule.rounds.each do |round| %>
+      <li>
+        <strong><%= round.round_name %>:</strong> 
+        <span>Type: <%= round.round_type %>, Start Date: <%= round.start_date %>, End Date: <%= round.end_date %></span>
+        <span>Venue: <%= round.venue %>, Link: <%= round.link %></span>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No rounds added yet.</p>
+<% end %>
+
+<%= link_to 'Add Round', new_club_sig_schedule_round_path(@club, @sig, @schedule) %>
+<%= link_to 'Back to SIG', club_sig_path(@sig.club, @sig) %>
+<%= link_to 'Back to Club', club_path(@club) %>

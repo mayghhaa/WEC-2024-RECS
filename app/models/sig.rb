@@ -1,8 +1,10 @@
 class Sig < ApplicationRecord
   belongs_to :club
 
-  has_one :schedule, dependent: :destroy
-  accepts_nested_attributes_for :schedule
+
+  # accepts_nested_attributes_for :schedule
 
   has_many :announcements
+  has_many :schedules, dependent: :destroy  # Ensure this line is present
+  has_many :rounds, through: :schedules
 end

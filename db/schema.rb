@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_08_132529) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_11_164740) do
   create_table "announcements", force: :cascade do |t|
     t.string "subject"
     t.text "content"
@@ -36,25 +36,39 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_08_132529) do
     t.integer "club_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status"
+    t.integer "round", default: 1
+    t.boolean "moving_forward", default: true
+    t.integer "sig_id"
     t.index ["club_id"], name: "index_registrations_on_club_id"
     t.index ["user_id", "club_id"], name: "index_registrations_on_user_id_and_club_id", unique: true
     t.index ["user_id"], name: "index_registrations_on_user_id"
   end
 
+  create_table "rounds", force: :cascade do |t|
+    t.string "round_name"
+    t.string "round_type"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "venue"
+    t.string "link"
+    t.integer "club_id"
+    t.integer "sig_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "round_number"
+    t.integer "schedule_id"
+    t.index ["club_id"], name: "index_rounds_on_club_id"
+    t.index ["sig_id"], name: "index_rounds_on_sig_id"
+  end
+
   create_table "schedules", force: :cascade do |t|
-    t.date "pre_recruitment_talk_date"
-    t.string "pre_recruitment_talk_venue"
-    t.boolean "tasks_applicable"
-    t.date "tasks_due_date"
-    t.boolean "oa_applicable"
-    t.date "oa_date"
-    t.date "interview_start_date"
-    t.date "interview_end_date"
-    t.string "interview_venue"
-    t.date "result_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "sig_id"
+    t.string "name"
+    t.integer "club_id"
+    t.index ["club_id"], name: "index_schedules_on_club_id"
     t.index ["sig_id"], name: "index_schedules_on_sig_id"
   end
 
@@ -84,6 +98,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_08_132529) do
   add_foreign_key "announcements", "sigs"
   add_foreign_key "registrations", "clubs"
   add_foreign_key "registrations", "users"
+  add_foreign_key "rounds", "clubs"
+  add_foreign_key "rounds", "sigs"
   add_foreign_key "schedules", "sigs"
   add_foreign_key "sigs", "clubs"
 end

@@ -1,26 +1,21 @@
 <h1><%= @sig.name %></h1>
 <p><%= @sig.description %></p>
 
-<h2>Recruitment Event</h2>
-<% if @sig.schedule.present? %>
+<h2>Recruitment Events</h2>
+<% if @sig.schedules.any? %>
   <ul>
-    <li><strong>Pre-Recruitment Talk Date:</strong> <%= @sig.schedule.pre_recruitment_talk_date %></li>
-    <li><strong>Pre-Recruitment Talk Venue:</strong> <%= @sig.schedule.pre_recruitment_talk_venue %></li>
-    <li><strong>Tasks Applicable:</strong> <%= @sig.schedule.tasks_applicable ? "Yes" : "No" %></li>
-    <li><strong>Tasks Due Date:</strong> <%= @sig.schedule.tasks_due_date %></li>
-    <li><strong>OA Applicable:</strong> <%= @sig.schedule.oa_applicable ? "Yes" : "No" %></li>
-    <li><strong>OA Date:</strong> <%= @sig.schedule.oa_date %></li>
-    <li><strong>Interview Start Date:</strong> <%= @sig.schedule.interview_start_date %></li>
-    <li><strong>Interview End Date:</strong> <%= @sig.schedule.interview_end_date %></li>
-    <li><strong>Interview Venue:</strong> <%= @sig.schedule.interview_venue %></li>
-    <li><strong>Result Date:</strong> <%= @sig.schedule.result_date %></li>
+    <% @sig.schedules.each do |schedule| %>
+      <li>
+        <strong>Schedule Name:</strong> <%= link_to schedule.name, club_sig_schedule_path(@sig.club, @sig, schedule) %><br>
+        
+        <!-- Add other schedule fields as needed -->
+        <strong>Number of Rounds:</strong> <%= schedule.rounds.count %><br>
+      </li>
+    <% end %>
   </ul>
 <% else %>
-  <p>No recruitment event has been scheduled for this SIG yet.</p>
-  <% if current_user_convener?(@club) %>
-  <%= link_to 'Add Recruitment Event', new_club_sig_schedule_path(@club, @sig) %>
-
-  <%end %>
+  <p>No recruitment events scheduled.</p>
 <% end %>
 
-<%= link_to 'Back to SIGs', club_path(@sig.club) %>
+<%= link_to 'Add Recruitment Event', new_club_sig_schedule_path(@sig.club, @sig), class: "btn btn-primary" %>
+<%= link_to 'Back to SIGs', club_sigs_path(@sig.club), class: "btn btn-secondary" %>

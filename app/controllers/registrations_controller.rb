@@ -8,16 +8,29 @@ class RegistrationsController < ApplicationController
   end
 
   def create
-    @registration = Registration.new(registration_params)
-    @registration.user = current_user  # Associate the registration with the current user
-    if @registration.save
-      redirect_to clubs_path, notice: 'Successfully registered for recruitment!'
-    else
-      @clubs = Club.all  # Ensure @clubs is set in case of validation errors
-      render :new
-    end
-  end
+    # Iterate over each selected SIG and create a separate registration for each
+    sig_ids = registration_params[:sig_ids].reject(&:blank?)  # Get selected SIGs
 
+    if sig_ids.empty?
+      flash[:alert] = "Please select at least one SIG to apply for."
+      @clubs = Club.all
+      render :new and return
+    end
+
+    sig_ids.each do |sig_id|
+      @registration = @club.registrations.new(
+        user: current_user,
+        sig_id: sig_id,
+        club_id: @club.id
+      )
+      unless @registration.save
+        flash[:alert] = "Error registering for SIG #{Sig.find(sig_id).name}."
+        render :new and return
+      end
+    end
+
+    redirect_to clubs_path, notice: 'Successfully registered for selected SIGs!'
+  end
   private
 
   def set_club
@@ -25,6 +38,6 @@ class RegistrationsController < ApplicationController
   end
 
   def registration_params
-    params.require(:registration).permit(:name, :email, :club_id)
+    params.require(:registration).permit(:club_id, sig_ids: [])
   end
 end

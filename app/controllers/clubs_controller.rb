@@ -1,6 +1,6 @@
 class ClubsController < ApplicationController
   before_action :authenticate_user!
-  before_action :authorize_convener, only: [:new, :create, :edit, :update]
+  before_action :authorize_convener, only: [ :edit, :update]
 
 
   def index

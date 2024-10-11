@@ -1,0 +1,33 @@
+<h1>Schedule Details</h1>
+
+<p><strong>Schedule Name:</strong> </p>
+<p><strong>Description:</strong> </p>
+
+<hr>
+
+<h2>Rounds for this Schedule</h2>
+
+<% if @schedule.rounds.any? %>
+  <ul>
+    <% @schedule.rounds.each do |round| %>
+      <li>
+        <strong>Round Name:</strong> <%= round.round_name %> | 
+        <strong>Type:</strong> <%= round.round_type %> | 
+        <strong>Start Date:</strong> <%= round.start_date %> | 
+        <strong>End Date:</strong> <%= round.end_date %> |
+        <strong>Venue:</strong> <%= round.venue %> |
+        <strong>Link:</strong> <%= round.link %>
+
+        <%= link_to 'View Details', club_sig_schedule_round_path(@club, @sig, @schedule, round) %> |
+        <%= link_to 'Edit', edit_club_sig_schedule_round_path(@club, @sig, @schedule, round) %> |
+        <%= link_to 'Delete', club_sig_schedule_round_path(@club, @sig, @schedule, round), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No rounds have been added to this schedule yet.</p>
+<% end %>
+
+<%= link_to 'Add New Round', new_club_sig_schedule_round_path(@club, @sig, @schedule), class: 'btn btn-primary' %>
+
+<%= link_to 'Back to SIG', club_sig_path(@club, @sig) %>

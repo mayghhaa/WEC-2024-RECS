@@ -1,60 +1,18 @@
-<h1>Add Recruitment Event for SIG: <%= @sig.name %> (Club: <%= @sig.club.name %>)</h1>
+<h1>Add Schedule for SIG: <%= @sig.name %> (Club: <%= @sig.club.name %>)</h1>
 
+<%= form_with(model: [@club, @sig, @schedule], url: club_sig_schedules_path(@club, @sig), local: true) do |f| %>  
+  <%= f.hidden_field :sig_id, value: @sig.id %>  <!-- Hidden field for sig_id -->
+  <%= f.hidden_field :club_id, value: @club.id %> <!-- Hidden field for club_id -->
 
-<%= form_with(model: [@club, @sig, @schedule], local: true) do |f| %>
   <div>
-    <%= f.label :pre_recruitment_talk_date, "Pre-Recruitment Talk Date" %>
-    <%= f.date_select :pre_recruitment_talk_date %>
+    <%= f.label :name, "Schedule Name" %>
+    <%= f.text_field :name, required: true %>
   </div>
 
   <div>
-    <%= f.label :pre_recruitment_talk_venue, "Pre-Recruitment Talk Venue" %>
-    <%= f.text_field :pre_recruitment_talk_venue %>
-  </div>
-
-  <div>
-    <%= f.label :tasks_applicable, "Are Tasks Applicable?" %>
-    <%= f.check_box :tasks_applicable %>
-  </div>
-
-  <div>
-    <%= f.label :tasks_due_date, "Tasks Due Date" %>
-    <%= f.date_select :tasks_due_date %>
-  </div>
-
-  <div>
-    <%= f.label :oa_applicable, "Is OA Applicable?" %>
-    <%= f.check_box :oa_applicable %>
-  </div>
-
-  <div>
-    <%= f.label :oa_date, "OA Date" %>
-    <%= f.date_select :oa_date %>
-  </div>
-
-  <div>
-    <%= f.label :interview_start_date, "Interview Start Date" %>
-    <%= f.date_select :interview_start_date %>
-  </div>
-
-  <div>
-    <%= f.label :interview_end_date, "Interview End Date" %>
-    <%= f.date_select :interview_end_date %>
-  </div>
-
-  <div>
-    <%= f.label :interview_venue, "Interview Venue" %>
-    <%= f.text_field :interview_venue %>
-  </div>
-
-  <div>
-    <%= f.label :result_date, "Result Date" %>
-    <%= f.date_select :result_date %>
-  </div>
-
-  <div>
-    <%= f.submit "Create Recruitment Event" %>
+    <%= f.submit "Create Schedule" %>
   </div>
 <% end %>
+
 <%= link_to 'Back to SIG', club_sig_path(@sig.club, @sig) %>
 <%= link_to 'Back to Club', club_path(@club) %>

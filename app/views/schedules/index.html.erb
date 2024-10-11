@@ -1,0 +1,14 @@
+<h1>Schedules for <%= @sig.name %></h1>
+
+<%= link_to 'Add New Schedule', new_club_sig_schedule_path(@club, @sig), class: 'btn btn-primary' %>
+
+<hr>
+
+<% if @sig.schedules.any? %>
+  <h2>Existing Schedules</h2>
+  
+<% else %>
+  <p>No schedules have been added yet.</p>
+<% end %>
+
+<%= link_to 'Back to SIGs', club_sig_path(@club, @sig) %>

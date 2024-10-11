@@ -1,0 +1,49 @@
+<h1>Add Round for Schedule: <%= @schedule.name %> (SIG: <%= @sig.name %>, Club: <%= @club.name %>)</h1>
+
+<%= form_with(model: [@club, @sig, @schedule, @round], local: true) do |f| %>
+  <!-- Hidden fields for club_id, sig_id, and schedule_id -->
+  <%= f.hidden_field :club_id, value: @club.id %>
+  <%= f.hidden_field :sig_id, value: @sig.id %>
+  <%= f.hidden_field :schedule_id, value: @schedule.id %>
+
+  <div>
+    <%= f.label :round_name, "Round Name" %>
+    <%= f.text_field :round_name, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :round_type, "Round Type" %>
+    <%= f.select :round_type, options_for_select(['Technical', 'HR', 'Group Discussion', 'Other']), prompt: 'Select Round Type' %>
+  </div>
+
+  <div>
+    <%= f.label :start_date, "Start Date" %>
+    <%= f.date_select :start_date, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :end_date, "End Date" %>
+    <%= f.date_select :end_date, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :venue, "Venue" %>
+    <%= f.text_field :venue, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :link, "Link (if any)" %>
+    <%= f.text_field :link %>
+  </div>
+
+  <div>
+    <%= f.label :round_number, "Round Number" %>
+    <%= f.number_field :round_number, required: true %>
+  </div>
+
+  <div>
+    <%= f.submit "Create Round" %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Schedule', club_sig_schedule_path(@club, @sig, @schedule) %>
