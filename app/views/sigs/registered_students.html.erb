@@ -3,17 +3,23 @@
 <table class="table">
   <thead>
     <tr>
-      
       <th>Email</th>
       <th>Status</th>
+      <th>Moving Forward</th>
+      <th>Round Number</th> <!-- New column for round number -->
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
     <% @registrations.each do |registration| %>
       <tr>
-        
         <td><%= registration.user.email %></td>
         <td><%= registration.status %></td>
+        <td><%= registration.moving_forward ? 'Yes' : 'No' %></td>
+        <td><%= registration.round %></td> <!-- Displaying round number -->
+        <td>
+          <%= link_to 'Edit', edit_club_sig_registration_path(@club, @sig, registration), class: 'btn btn-primary btn-sm' %>
+        </td>
       </tr>
     <% end %>
   </tbody>

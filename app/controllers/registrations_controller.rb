@@ -32,7 +32,23 @@ class RegistrationsController < ApplicationController
     redirect_to clubs_path, notice: 'Successfully registered for selected SIGs!'
   end
 
+  def edit
+    @club = Club.find(params[:club_id])  # Set the club
+    @registration = Registration.find(params[:id])
+    @sig = Sig.find(@registration.sig_id)  # Set the associated SIG
+  end
 
+  def update
+    @club = Club.find(params[:club_id])  # Set the club
+    @registration = Registration.find(params[:id])
+    @sig = Sig.find(@registration.sig_id)  # Set the associated SIG for the update
+
+    if @registration.update(registration_status_params)
+      redirect_to registered_students_club_sig_path(@club, @sig), notice: 'Registration updated successfully.'
+    else
+      render :edit, alert: 'Error updating registration.'
+    end
+  end
   private
 
   def set_club
@@ -41,5 +57,9 @@ class RegistrationsController < ApplicationController
 
   def registration_params
     params.require(:registration).permit(:club_id, sig_ids: [])
+  end
+
+  def registration_status_params
+    params.require(:registration).permit(:status, :moving_forward) # Permit status and moving_forward
   end
 end

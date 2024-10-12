@@ -8,9 +8,11 @@ Rails.application.routes.draw do
       member do
         get 'registered_students'  # Adds a route like /clubs/:id/registered_students
       end
+      resources :registrations
       resources :schedules do # This is correctly nested within SIGs
         resources :rounds do
           # Custom route to complete a round within a SIG
+
           patch :complete_round, on: :member
         end
       end
