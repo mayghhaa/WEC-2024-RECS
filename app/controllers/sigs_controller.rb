@@ -1,6 +1,6 @@
 class SigsController < ApplicationController
   before_action :set_club
-  before_action :set_sig, only: [:show, :edit, :update, :destroy, :registered_students]
+  before_action :set_sig, only: [:show, :edit, :update, :destroy, :registered_students, :final_select]
   before_action :authenticate_user!
   before_action :authorize_convener!
 
@@ -51,6 +51,10 @@ class SigsController < ApplicationController
 
   def registered_students
     @registrations = Registration.where(club_id: @club.id, sig_id: @sig.id).includes(:user)
+  end
+
+  def final_select
+    @registrations = Registration.where(club_id: @club.id, sig_id: @sig.id, status: 'accepted').includes(:user)
   end
 
   private

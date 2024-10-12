@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :sigs do
       member do
         get 'registered_students'  # Adds a route like /clubs/:id/registered_students
+        get 'final_select'
       end
       resources :registrations
       resources :schedules do # This is correctly nested within SIGs
