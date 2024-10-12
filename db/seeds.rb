@@ -1,9 +1,83 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# db/seeds.rb
+
+# Students
+User.create!(
+  email: 'student1@nitk.edu.in',
+  password: 'password123',
+  name: 'Student One',
+  roll_number: '221NITK001',
+  role: 'student'
+)
+
+User.create!(
+  email: 'student2@nitk.edu.in',
+  password: 'password123',
+  name: 'Student Two',
+  roll_number: '221NITK002',
+  role: 'student'
+)
+
+User.create!(
+  email: 'student3@nitk.edu.in',
+  password: 'password123',
+  name: 'Student Three',
+  roll_number: '221NITK003',
+  role: 'student'
+)
+
+User.create!(
+  email: 'student4@example.com',
+  password: 'password123',
+  name: 'Student Four',
+  roll_number: '221NITK004',
+  role: 'student'
+)
+
+User.create!(
+  email: 'student5@example.com',
+  password: 'password123',
+  name: 'Student Five',
+  roll_number: '221NITK005',
+  role: 'student'
+)
+
+# Conveners
+User.create!(
+  email: 'convener1@example.com',
+  password: 'password123',
+  name: 'Convener One',
+  roll_number: '221NITK101',
+  role: 'convener'
+)
+
+User.create!(
+  email: 'convener2@example.com',
+  password: 'password123',
+  name: 'Convener Two',
+  roll_number: '221NITK102',
+  role: 'convener'
+)
+
+User.create!(
+  email: 'convener3@example.com',
+  password: 'password123',
+  name: 'Convener Three',
+  roll_number: '221NITK103',
+  role: 'convener'
+)
+
+User.create!(
+  email: 'convener4@example.com',
+  password: 'password123',
+  name: 'Convener Four',
+  roll_number: '221NITK104',
+  role: 'convener'
+)
+
+User.create!(
+  email: 'convener5@example.com',
+  password: 'password123',
+  name: 'Convener Five',
+  roll_number: '221NITK105',
+  role: 'convener'
+)

@@ -1,6 +1,6 @@
 class ClubsController < ApplicationController
   before_action :authenticate_user!
-  before_action :authorize_convener, only: [ :edit, :update]
+  before_action :authorize_convener, only: [ :edit, :update, :destroy]
 
 
   def index
@@ -36,12 +36,12 @@ class ClubsController < ApplicationController
 
   def edit
     @club = Club.find(params[:id])
-    authorize @club
+
   end
 
   def update
     @club = Club.find(params[:id])
-    authorize @club
+
     if @club.update(club_params)
       redirect_to @club, notice: 'Club was successfully updated.'
     else
@@ -52,6 +52,12 @@ class ClubsController < ApplicationController
   # def preference_form
   #   @exclusive_clubs = Club.where(exclusive: true)  # Fetch exclusive clubs
   # end
+  def destroy
+    @club = Club.find(params[:id])
+    authorize @club
+    @club.destroy
+    redirect_to clubs_path, notice: 'Club was successfully deleted.'
+  end
 
   private
 

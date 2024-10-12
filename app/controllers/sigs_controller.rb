@@ -12,6 +12,7 @@ class SigsController < ApplicationController
   # GET /clubs/:club_id/sigs/:id
   def show
     # @sig is set by the set_sig before_action
+    @registrations=Registration.where(club_id: @club.id, sig_id: @sig.id)
   end
 
   # GET /clubs/:club_id/sigs/new

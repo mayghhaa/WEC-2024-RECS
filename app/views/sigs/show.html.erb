@@ -6,10 +6,11 @@
   <ul>
     <% @sig.schedules.each do |schedule| %>
       <li>
-        <strong>Schedule Name:</strong> <%= link_to schedule.name, club_sig_schedule_path(@sig.club, @sig, schedule) %><br>
+        <strong>Schedule Name:</strong> <%= link_to schedule.name, club_sig_schedule_rounds_path(@sig.club, @sig, schedule) %><br>
         
         <!-- Add other schedule fields as needed -->
         <strong>Number of Rounds:</strong> <%= schedule.rounds.count %><br>
+        <strong>Registered Students:</strong><%= link_to @registrations.count, registered_students_club_sig_path(@club, @sig )%>
       </li>
     <% end %>
   </ul>
@@ -18,4 +19,4 @@
 <% end %>
 
 <%= link_to 'Add Recruitment Event', new_club_sig_schedule_path(@sig.club, @sig), class: "btn btn-primary" %>
-<%= link_to 'Back to SIGs', club_sigs_path(@sig.club), class: "btn btn-secondary" %>
+<%= link_to 'Back to SIGs', club_path(@sig.club), class: "btn btn-secondary" %>

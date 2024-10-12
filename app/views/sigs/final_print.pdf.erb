@@ -93,7 +93,7 @@
         <thead style="margin-top:10px;">
           <tr>
             <td class="head">Sl. No.</td>
-            
+            <td class="head">Student Name</td>
             <td class="head">Email</td>
             <td class="head">Status</td>
           </tr>
@@ -102,7 +102,7 @@
           <% @registrations&.each_with_index do |registration, index| %>
             <tr>
               <td><%= index + 1 %></td>
-              
+              <td style="text-align: left;"><%= registration.user.name %></td>
               <td><%= registration.user.email %></td>
               <td><%= registration.status %></td>
             </tr>
