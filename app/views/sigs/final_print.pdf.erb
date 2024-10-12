@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Final Selection List </title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style media="screen">
+    .container-11 {
+      display: -webkit-box;
+      margin: 0 0 2em 0;
+    }
+
+    #margin {
+      margin: 3px;
+      border: 2px dashed grey;
+      padding: 15px;
+      border-radius: 2px;
+    }
+
+    .heading {
+      width: 100%;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .logo {
+      display: -webkit-box;
+      -webkit-box-pack: center;
+      align-items: center;
+    }
+
+    .department-heading {
+      background-color: white;
+      color: black;
+      border: 1px solid red;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      text-align: center;
+    }
+
+    .department-title {
+      font-size: 20px;
+      background-color: #198754;
+      color: #fff;
+      padding: 6px;
+      border-radius: 5px;
+    }
+
+    .table th {
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #eee;
+    }
+
+    .table td {
+      text-align: center;
+      vertical-align: middle;
+      border: 1px solid #e6e6e6;
+      padding: 1px;
+    }
+
+    .head {
+      background-color: rgba(25,46,89,255);
+      color: #fff;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .table tbody tr:nth-child(odd) {
+      background-color: #eee;
+    }
+
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+  <div id="margin">
+    <div class="container-11">
+      
+    </div>
+    <div class="container-11">
+      <div class="heading">
+        <center>
+          <h1 class="fw-bold">Final Selection for <%= @club&.name %></h1>
+          <h3><%= @sig&.name %></h3>
+         </center>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <table class="table">
+        <thead style="margin-top:10px;">
+          <tr>
+            <td class="head">Sl. No.</td>
+            
+            <td class="head">Email</td>
+            <td class="head">Status</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @registrations&.each_with_index do |registration, index| %>
+            <tr>
+              <td><%= index + 1 %></td>
+              
+              <td><%= registration.user.email %></td>
+              <td><%= registration.status %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <%= javascript_include_tag "https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" %>
+</body>
+</html>

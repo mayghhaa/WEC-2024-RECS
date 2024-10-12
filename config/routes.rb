@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       member do
         get 'registered_students'  # Adds a route like /clubs/:id/registered_students
         get 'final_select'
+        get :final_print, defaults: { format: :pdf }
       end
       resources :registrations
       resources :schedules do # This is correctly nested within SIGs

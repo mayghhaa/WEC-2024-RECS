@@ -1,8 +1,8 @@
 class SigsController < ApplicationController
   before_action :set_club
   before_action :set_sig, only: [:show, :edit, :update, :destroy, :registered_students, :final_select]
-  before_action :authenticate_user!
-  before_action :authorize_convener!
+  before_action :authenticate_user!, except: [:final_print]
+  before_action :authorize_convener!, except: [:final_print]
 
   # GET /clubs/:club_id/sigs
   def index
@@ -56,6 +56,36 @@ class SigsController < ApplicationController
   def final_select
     @registrations = Registration.where(club_id: @club.id, sig_id: @sig.id, status: 'accepted').includes(:user)
   end
+
+  def final_print
+
+    @club = Club.find(params[:club_id]) # Fetch the club based on the passed parameters
+    @sig = Sig.find(params[:id]) # Fetch the SIG if needed
+    @registrations = Registration.where(club_id: @club.id, sig_id: @sig.id, status: 'accepted').includes(:user)
+
+
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "Final Selection for #{@club.name}",
+               template: "sigs/final_print",
+               layout: "layouts/pdf",
+               disposition: 'inline',
+               margin: { top: 0, bottom: 0, left: 0, right: 0 },
+               locals: { user: @user, club: @club, sig: @sig, registrations: @registrations }
+      end
+    end
+  end
+  # def final_print
+  #   respond_to do |format|
+  #     format.html
+  #     format.pdf do
+  #       render pdf: "test",
+  #              text: "Hello World",
+  #              page_size: 'A4'
+  #     end
+  #   end
+  # end
 
   private
 
