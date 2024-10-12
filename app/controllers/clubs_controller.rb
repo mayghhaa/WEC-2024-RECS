@@ -49,11 +49,14 @@ class ClubsController < ApplicationController
     end
 
   end
+  # def preference_form
+  #   @exclusive_clubs = Club.where(exclusive: true)  # Fetch exclusive clubs
+  # end
 
   private
 
   def club_params
-    params.require(:club).permit(:name, :description, :convener_id)
+    params.require(:club).permit(:name, :description, :exclusive,:convener_id)
   end
 
   def authorize_convener

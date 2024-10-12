@@ -4,6 +4,9 @@ Rails.application.routes.draw do
 
   # Nested resources for clubs, SIGs, schedules, and rounds
   resources :clubs do
+    # collection do
+    #   get :preference_form  # Add this line
+    # end
     resources :sigs do
       member do
         get 'registered_students'  # Adds a route like /clubs/:id/registered_students
