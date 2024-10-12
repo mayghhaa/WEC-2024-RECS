@@ -25,7 +25,8 @@
   <% end %>
 
   <% if current_user_convener?(@club) %>
-    <%= link_to 'Add SIG', new_club_sig_path(@club), class: "btn btn-secondary" %>
+    <%= link_to 'Add SIG', new_club_sig_path(@club), class: "btn btn-secondary mb-2" %>
+    <%= link_to 'Create Announcement', new_announcement_path(), class: "btn btn-secondary mb-4" %>
   <% end %>
 
   <%= link_to 'Back to Clubs', clubs_path, class: "btn btn-secondary" %>

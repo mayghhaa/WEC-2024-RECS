@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_11_181708) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_12_080446) do
   create_table "announcements", force: :cascade do |t|
     t.string "subject"
     t.text "content"
@@ -29,6 +29,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_11_181708) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.integer "convener_id"
+    t.boolean "exclusive", default: false
   end
 
   create_table "registrations", force: :cascade do |t|

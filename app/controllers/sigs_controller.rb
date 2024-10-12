@@ -16,7 +16,7 @@ class SigsController < ApplicationController
 
   # GET /clubs/:club_id/sigs/new
   def new
-    @sig = @club.sigs.build  # Build a new SIG associated with the club
+    @sig = @club.sigs.build  # No need to manually find the club again, it's already set by set_club
   end
 
   # POST /clubs/:club_id/sigs
@@ -50,24 +50,19 @@ class SigsController < ApplicationController
   end
 
   def registered_students
-    @club = Club.find(params[:club_id])
-    @sig = Sig.find(params[:id])
     @registrations = Registration.where(club_id: @club.id, sig_id: @sig.id).includes(:user)
   end
-
-
-
 
   private
 
   # Set the club based on the club_id parameter
   def set_club
-    @club = Club.find_by(params[:club_id])  # Corrected to find the club by id
+    @club = Club.find(params[:club_id])  # Corrected to find the club by id
   end
 
   # Set the SIG based on the id parameter within the club context
   def set_sig
-    @sig = @club.sigs.find_by(params[:id])  # Corrected to use find, not find_by
+    @sig = @club.sigs.find(params[:id])  # Corrected to use find, not find_by
   end
 
   # Permit the parameters for SIG creation and updating
