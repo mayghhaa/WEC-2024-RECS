@@ -66,3 +66,13 @@ https://www.youtube.com/embed/9mvibTFd8pc
 - Node.js & Yarn (for managing frontend dependencies)
 
 ### Setup Instructions
+```
+git clone https://github.com/mayghhaa/WEC-2024-RECS.git
+cd  WEC-2024-RECS
+
+bundle install
+rails db:migrate
+rails db:seed
+
+rails server
+```
